@@ -1,23 +1,26 @@
-import logo from './logo.svg';
+import { Routes, Route, Link } from 'react-router-dom';
 import './App.css';
-
+import Product from './components/Products';
+import Card from './components/Card';
+import { useSelector } from 'react-redux';
 function App() {
+  const product = useSelector((state) => state.card)
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+      <header>
+        <Link to="/">
+          <h4>Product Items</h4>
+        </Link>
+        <div>
+          <Link to="/card">Items: {product.length}</Link>
+        </div>
       </header>
+      <div className="">
+        <Routes>
+          <Route path="/" element={<Product />} />
+          <Route path="/card" element={<Card />} />
+        </Routes>
+      </div>
     </div>
   );
 }
